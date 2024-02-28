@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend('re_QHRzrGrC_KRxSS5mVm1oM3VVYywwLmuYb');
 const fromEmail = process.env.FROM_EMAIL;
 
 export async function POST(req, res) {
@@ -9,8 +9,8 @@ export async function POST(req, res) {
   console.log(email, subject, message);
   try {
     const data = await resend.emails.send({
-      from: fromEmail,
-      to: [fromEmail, email],
+      from: 'onboarding@resend.dev',
+      to: 'akili.digit@gmail.com',
       subject: subject,
       react: (
         <>
