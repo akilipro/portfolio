@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend('re_QHRzrGrC_KRxSS5mVm1oM3VVYywwLmuYb');
-const fromEmail = process.env.FROM_EMAIL;
+//const fromEmail = process.env.FROM_EMAIL;
 
 export async function POST(req, res) {
   const { email, subject, message } = await req.json();
@@ -12,17 +12,17 @@ export async function POST(req, res) {
       from: 'onboarding@resend.dev',
       to: 'akili.digit@gmail.com',
       subject: subject,
+      html: '<p>Congrats on sending your <strong>first email</strong>!</p>',
       react: (
         <>
           <h1>{subject}</h1>
-          <p>Thank you for contacting us!</p>
-          <p>New message submitted:</p>
           <p>{message}</p>
         </>
       ),
     });
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error });
+    console.error('Error sending email:', error);
+    return NextResponse.json({ error: 'Failed to send email.' });
   }
 }
